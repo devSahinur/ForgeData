@@ -1,8 +1,10 @@
 # CLI Reference
 
 ```bash
-npx forgedata --help
+npx --package=@sahinur/forgedata forgedata --help
 ```
+
+(The package is published as `@sahinur/forgedata`, but its bin command is the shorter `forgedata` — `npx` needs `--package` whenever the command name doesn't match the package name. Once installed — globally or as a project dependency — just run `forgedata ...` directly, as in every example below.)
 
 ```
 forgedata v0.1.0 — fake data from the command line
@@ -51,14 +53,14 @@ Non-string results (objects, e.g. `location.airport`) are printed as JSON even w
 ## Installing globally
 
 ```bash
-npm install -g forgedata
+npm install -g @sahinur/forgedata
 forgedata list
 ```
 
 Or invoke it without installing:
 
 ```bash
-npx forgedata generate person.fullName
+npx --package=@sahinur/forgedata forgedata generate person.fullName
 ```
 
 ## Scripting example

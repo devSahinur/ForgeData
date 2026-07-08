@@ -21,7 +21,7 @@ npm whoami
 echo "==> Package contents that will be published:"
 npm pack --dry-run
 
-read -r -p "Publish forgedata@$(node -p "require('./package.json').version") to npm now? [y/N] " confirm
+read -r -p "Publish $(node -p "require('./package.json').name")@$(node -p "require('./package.json').version") to npm now? [y/N] " confirm
 if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
   echo "Aborted. Nothing was published."
   exit 1

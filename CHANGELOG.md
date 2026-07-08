@@ -13,7 +13,10 @@ this line by CI; do not hand-edit past releases.
 
 ## [0.1.0] - Unreleased
 
-Initial release.
+Initial release. Published as the scoped package `@sahinur/forgedata` — the
+unscoped `forgedata` name is blocked by npm's anti-typosquatting policy
+(flagged as too similar to the popular `form-data` package). The CLI command
+itself is still the short `forgedata` regardless of package scope.
 
 ### Added
 
@@ -30,14 +33,14 @@ Initial release.
   `weighted`, `probability`, `randomArray`, `randomObjectKey/Value`.
 - Generator introspection: `forge.listGenerators()` / `forge.invoke()`, built
   by walking the real module classes rather than a hand-maintained registry.
-- React integration at the `forgedata/react` subpath: `ForgeDataProvider`,
+- React integration at the `@sahinur/forgedata/react` subpath: `ForgeDataProvider`,
   `useForgeData()`, `useGenerator()`. `react` is an optional peer dependency.
 - CLI (`forgedata` bin): `list` and `generate` commands with
   `--seed`/`--locale`/`--count`/`--json` flags.
 - ESM + CommonJS builds with full TypeScript declarations for the main entry,
-  `forgedata/react`, and the CLI.
+  `@sahinur/forgedata/react`, and the CLI.
 - 100% statement/branch/function/line test coverage (enforced in CI).
 - Zero runtime dependencies; only web-standard APIs (`btoa`, etc.) so the
   package runs unmodified on Node.js 18+, Bun, Deno, and in browsers.
 
-[0.1.0]: https://github.com/forgedata/forgedata/releases/tag/v0.1.0
+[0.1.0]: https://github.com/devSahinur/ForgeData/releases/tag/v0.1.0

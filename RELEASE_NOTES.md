@@ -26,7 +26,7 @@ alternative to Faker.js with React integration and a CLI built in.
   plus a custom locale API.
 - **Custom generators** (`forge.define()`) and a **unique-value generator**
   (`forge.unique.email()`, etc.).
-- **React integration** at `forgedata/react`: `ForgeDataProvider`,
+- **React integration** at `@sahinur/forgedata/react`: `ForgeDataProvider`,
   `useForgeData()`, `useGenerator()`. `react` is an optional peer dependency —
   the main entry point never imports it.
 - **CLI** (`forgedata`): `forgedata generate person.fullName --seed 42`,
@@ -36,13 +36,17 @@ alternative to Faker.js with React integration and a CLI built in.
 ## Install
 
 ```bash
-npm install forgedata
+npm install @sahinur/forgedata
 ```
+
+Published under the `@sahinur` scope because npm's anti-typosquatting policy
+blocks the unscoped `forgedata` name (too similar to the popular `form-data`
+package). The CLI command is still just `forgedata`.
 
 ## Quick start
 
 ```ts
-import { ForgeData } from "forgedata";
+import { ForgeData } from "@sahinur/forgedata";
 
 const forge = new ForgeData({ seed: 42 });
 forge.person.fullName();
@@ -54,6 +58,6 @@ reference, React guide, CLI reference, and migration notes from Faker.js.
 
 ## Links
 
-- npm: https://www.npmjs.com/package/forgedata
+- npm: https://www.npmjs.com/package/@sahinur/forgedata
 - Docs: [docs/getting-started.md](./docs/getting-started.md)
 - Changelog: [CHANGELOG.md](./CHANGELOG.md)

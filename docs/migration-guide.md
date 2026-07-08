@@ -23,12 +23,12 @@ ForgeData follows a similar module-and-method shape to `@faker-js/faker`, but wi
 
 ## Key differences
 
-1. **Instance-based, not a global singleton.** `new ForgeData()` gives you an isolated random stream. ForgeData also exports a ready-made singleton (`import { forge } from "forgedata"`), but construct your own per test file/suite when you need isolation.
+1. **Instance-based, not a global singleton.** `new ForgeData()` gives you an isolated random stream. ForgeData also exports a ready-made singleton (`import { forge } from "@sahinur/forgedata"`), but construct your own per test file/suite when you need isolation.
 2. **Seeding is constructor-first.** Prefer `new ForgeData({ seed })` over calling `.seed()` after the fact, though both work.
 3. **Locale data shape is simpler.** ForgeData locales cover names, places, lorem words, and company phrasing — not every Faker.js locale category. Extend via `forge.defineLocale(...)`.
 4. **No module-specific singletons** like `faker.fakerEN`, `faker.fakerDE`, etc. — pass `locale` to the constructor or call `forge.locale(code)`.
 5. **Unique generator is per-instance and explicit** (`forge.unique.email()`), not a global unique-tracking layer.
-6. **Built-in React integration and CLI** — Faker.js has neither out of the box; ForgeData ships `forgedata/react` and the `forgedata` CLI.
+6. **Built-in React integration and CLI** — Faker.js has neither out of the box; ForgeData ships `@sahinur/forgedata/react` and the `forgedata` CLI.
 7. **Generator discovery is programmatic.** `forge.listGenerators()` walks the real classes instead of requiring a hand-maintained catalogue — useful for building your own tooling (it's what the CLI is built on).
 
 ## Things ForgeData intentionally does not replicate

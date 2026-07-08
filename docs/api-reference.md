@@ -60,7 +60,7 @@ Every module below is a plain class instantiated once per `ForgeData`. Full meth
 
 Built-in codes: `en`, `bn`, `hi`, `ar`, `ja`, `fr`, `de`, `es`, `zh`. Register additional ones with `forge.defineLocale(data)`.
 
-## React (`forgedata/react`)
+## React (`@sahinur/forgedata/react`)
 
 See [react.md](./react.md).
 

@@ -1,5 +1,5 @@
 {
-  "name": "forgedata",
+  "name": "@sahinur/forgedata",
   "version": "0.1.0",
   "description": "A modern, modular, tree-shakable, zero-dependency fake data generator for TypeScript and JavaScript. A production-ready alternative to Faker.js with React integration and a CLI.",
   "keywords": [
@@ -104,11 +104,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/forgedata/forgedata.git"
+    "url": "git+https://github.com/devSahinur/ForgeData.git"
   },
-  "homepage": "https://forgedata.dev",
+  "homepage": "https://github.com/devSahinur/ForgeData#readme",
   "bugs": {
-    "url": "https://github.com/forgedata/forgedata/issues"
+    "url": "https://github.com/devSahinur/ForgeData/issues"
   },
   "author": "ForgeData Contributors",
   "publishConfig": {

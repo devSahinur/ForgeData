@@ -11,20 +11,20 @@ A modern, modular, tree-shakable, zero-runtime-dependency fake data generator fo
 - **Seedable** — deterministic output for tests and snapshots
 - **9 built-in locales**, plus a custom locale API
 - **Custom generators** via `forge.define(...)`
-- **React integration** (`forgedata/react`): a provider + two hooks
+- **React integration** (`@sahinur/forgedata/react`): a provider + two hooks
 - **CLI** (`forgedata`): generate fake data from your terminal or scripts
 - **100% test coverage** (statements/branches/functions/lines)
 
 ## Install
 
 ```bash
-npm install forgedata
+npm install @sahinur/forgedata
 ```
 
 ## Quick start
 
 ```ts
-import { ForgeData } from "forgedata";
+import { ForgeData } from "@sahinur/forgedata";
 
 const forge = new ForgeData();
 
@@ -39,7 +39,7 @@ forge.ai.prompt();                // "Explain quantum computing to a beginner...
 Or use the ready-made default instance for quick scripts:
 
 ```ts
-import { forge } from "forgedata";
+import { forge } from "@sahinur/forgedata";
 
 console.log(forge.person.fullName());
 ```
@@ -141,7 +141,7 @@ This is what the CLI is built on.
 ## React integration
 
 ```tsx
-import { ForgeDataProvider, useForgeData, useGenerator } from "forgedata/react";
+import { ForgeDataProvider, useForgeData, useGenerator } from "@sahinur/forgedata/react";
 
 function App() {
   return (
@@ -161,19 +161,19 @@ function UserCard() {
 }
 ```
 
-`useForgeData()` works even without a `ForgeDataProvider` (it falls back to a shared default instance) — wrap your tree in a provider whenever you need a specific seed/locale or per-instance isolation. `react` is an optional peer dependency; the main `forgedata` entry point never imports it.
+`useForgeData()` works even without a `ForgeDataProvider` (it falls back to a shared default instance) — wrap your tree in a provider whenever you need a specific seed/locale or per-instance isolation. `react` is an optional peer dependency; the main `@sahinur/forgedata` entry point never imports it.
 
 ## CLI
 
 ```bash
-npx forgedata list                                  # every generator id
-npx forgedata list --module person                  # filtered to one module
-npx forgedata generate person.fullName               # one value
-npx forgedata generate internet.email --count 5 --seed 42
-npx forgedata generate location.country --locale ja --json
+npx --package=@sahinur/forgedata forgedata list                     # every generator id
+npx --package=@sahinur/forgedata forgedata list --module person     # filtered to one module
+npx --package=@sahinur/forgedata forgedata generate person.fullName # one value
+npx --package=@sahinur/forgedata forgedata generate internet.email --count 5 --seed 42
+npx --package=@sahinur/forgedata forgedata generate location.country --locale ja --json
 ```
 
-Install it globally or use `npx`; see [docs/cli.md](./docs/cli.md) for the full flag reference.
+Install it globally (`npm install -g @sahinur/forgedata`) to just run `forgedata ...` directly; see [docs/cli.md](./docs/cli.md) for the full flag reference.
 
 ## Modules
 
@@ -204,8 +204,8 @@ ForgeData avoids Node-only APIs in `src/` — it uses only `btoa`, `Math`/`Date`
 
 - **Node.js**: `import`/`require` both work out of the box.
 - **Bun**: works via the same ESM/CJS builds.
-- **Deno**: `import { ForgeData } from "npm:forgedata";`
-- **Browsers**: `import { ForgeData } from "forgedata";` through any bundler, or `examples/browser.html` for a zero-bundler example.
+- **Deno**: `import { ForgeData } from "npm:@sahinur/forgedata";`
+- **Browsers**: `import { ForgeData } from "@sahinur/forgedata";` through any bundler, or `examples/browser.html` for a zero-bundler example.
 
 ## Development
 

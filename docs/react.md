@@ -1,9 +1,9 @@
 # React Integration
 
-Import from the `forgedata/react` subpath — it's a separate entry point so the main `forgedata` import never pulls in React.
+Import from the `@sahinur/forgedata/react` subpath — it's a separate entry point so the main `@sahinur/forgedata` import never pulls in React.
 
 ```bash
-npm install forgedata react
+npm install @sahinur/forgedata react
 ```
 
 ## `ForgeDataProvider`
@@ -11,7 +11,7 @@ npm install forgedata react
 Provides one `ForgeData` instance to everything below it in the tree.
 
 ```tsx
-import { ForgeDataProvider } from "forgedata/react";
+import { ForgeDataProvider } from "@sahinur/forgedata/react";
 
 function App() {
   return (
@@ -35,7 +35,7 @@ The instance is created once (on first render) and kept for the component's life
 ## `useForgeData()`
 
 ```tsx
-import { useForgeData } from "forgedata/react";
+import { useForgeData } from "@sahinur/forgedata/react";
 
 function Greeting() {
   const forge = useForgeData();
@@ -50,7 +50,7 @@ Returns the nearest `ForgeDataProvider`'s instance, or a shared module-level def
 Runs `selector(forge)` once per unique `deps` array via `useMemo`, so generated fixtures stay stable across re-renders instead of regenerating on every render.
 
 ```tsx
-import { useGenerator } from "forgedata/react";
+import { useGenerator } from "@sahinur/forgedata/react";
 
 function UserCard({ userId }: { userId: string }) {
   const user = useGenerator(
@@ -73,5 +73,5 @@ function UserCard({ userId }: { userId: string }) {
 
 ## Notes
 
-- `react` is an optional peer dependency — only import `forgedata/react` in apps that already have React installed.
+- `react` is an optional peer dependency — only import `@sahinur/forgedata/react` in apps that already have React installed.
 - Both hooks call `useForgeData()` internally, which follows the Rules of Hooks; call them at the top level of your component/hook, not conditionally.

@@ -40,7 +40,7 @@ Core argument parsing/dispatch logic lives in `src/cli-core.ts` (fully unit test
 
 ## Working on the React integration
 
-`src/react/index.tsx` is a separate tsup entry (`forgedata/react`) with `react` as an external peer dependency — never import it from `src/index.ts`. Test with `@testing-library/react` + jsdom (`// @vitest-environment jsdom` at the top of the test file).
+`src/react/index.tsx` is a separate tsup entry (`@sahinur/forgedata/react`) with `react` as an external peer dependency — never import it from `src/index.ts`. Test with `@testing-library/react` + jsdom (`// @vitest-environment jsdom` at the top of the test file).
 
 ## Code style
 

@@ -3,13 +3,13 @@
 ## Install
 
 ```bash
-npm install forgedata
+npm install @sahinur/forgedata
 ```
 
 ## Your first generator
 
 ```ts
-import { ForgeData } from "forgedata";
+import { ForgeData } from "@sahinur/forgedata";
 
 const forge = new ForgeData();
 
@@ -22,7 +22,7 @@ console.log(forge.internet.email());
 ## Seeding for deterministic tests
 
 ```ts
-import { ForgeData } from "forgedata";
+import { ForgeData } from "@sahinur/forgedata";
 
 const forge = new ForgeData({ seed: "my-test-suite" });
 
