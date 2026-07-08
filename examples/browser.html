@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ForgeData — browser example</title>
+  </head>
+  <body>
+    <h1>ForgeData in the browser</h1>
+    <pre id="output">Loading...</pre>
+
+    <!-- Build the package first (npm run build), then serve this folder with any static server. -->
+    <script type="module">
+      import { ForgeData } from "../dist/index.js";
+
+      const forge = new ForgeData({ seed: Date.now() });
+      const lines = [
+        `Name: ${forge.person.fullName()}`,
+        `Email: ${forge.internet.email()}`,
+        `Country: ${forge.location.country()}`,
+        `Avatar: ${forge.image.avatar()}`,
+        `UUID: ${forge.uuid()}`,
+      ];
+      document.getElementById("output").textContent = lines.join("\n");
+    </script>
+  </body>
+</html>
