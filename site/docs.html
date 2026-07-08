@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation — ForgeData</title>
+    <meta name="description" content="ForgeData documentation: getting started, full API reference, React integration, CLI reference, and a migration guide from Faker.js." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>⚒️</text></svg>" />
+    <link rel="stylesheet" href="./dist/output.css" />
+    <script>
+      if (localStorage.theme === "light") document.documentElement.classList.remove("dark");
+    </script>
+  </head>
+  <body class="antialiased">
+    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/80">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <a href="./index.html" class="flex items-center gap-2 text-lg font-bold">
+          <span aria-hidden="true">⚒️</span>
+          <span>ForgeData</span>
+        </a>
+        <nav class="hidden items-center gap-8 md:flex">
+          <a href="./index.html" class="nav-link">Home</a>
+          <a href="https://github.com/devSahinur/ForgeData" class="nav-link">GitHub</a>
+          <a href="https://www.npmjs.com/package/@sahinur/forgedata" class="nav-link">npm</a>
+        </nav>
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          class="rounded-lg border border-slate-300 p-2 text-slate-600 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900"
+        >
+          <svg id="icon-sun" class="hidden h-5 w-5 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+          </svg>
+          <svg id="icon-moon" class="block h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646Z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="mx-auto flex max-w-7xl gap-10 px-6 py-10">
+      <!-- Sidebar -->
+      <aside class="sticky top-24 hidden h-[calc(100vh-7rem)] w-56 shrink-0 overflow-y-auto text-sm lg:block">
+        <nav class="flex flex-col gap-1">
+          <p class="mb-1 mt-4 font-semibold text-slate-400 first:mt-0">Introduction</p>
+          <a href="#getting-started" class="nav-link py-1">Getting Started</a>
+          <a href="#seeding" class="nav-link py-1">Seeding</a>
+          <a href="#locales" class="nav-link py-1">Locales</a>
+          <a href="#custom-generators" class="nav-link py-1">Custom Generators</a>
+          <a href="#unique-values" class="nav-link py-1">Unique Values</a>
+          <a href="#helpers" class="nav-link py-1">Helpers</a>
+
+          <p class="mb-1 mt-4 font-semibold text-slate-400">Reference</p>
+          <a href="#api-reference" class="nav-link py-1">API Reference</a>
+          <a href="#react" class="nav-link py-1">React Integration</a>
+          <a href="#cli" class="nav-link py-1">CLI Reference</a>
+
+          <p class="mb-1 mt-4 font-semibold text-slate-400">More</p>
+          <a href="#migration-guide" class="nav-link py-1">Migration from Faker.js</a>
+          <a href="#contributing" class="nav-link py-1">Contributing</a>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <main class="min-w-0 flex-1 prose prose-slate max-w-none dark:prose-invert lg:prose-lg prose-pre:bg-slate-950 prose-pre:text-slate-100 prose-code:before:content-none prose-code:after:content-none">
+        <h1>Documentation</h1>
+        <p>Everything you need to install, seed, extend, and ship fake data with ForgeData.</p>
+
+        <h2 id="getting-started">Getting Started</h2>
+        <pre><code>npm install @sahinur/forgedata</code></pre>
+        <pre><code>import { ForgeData } from "@sahinur/forgedata";
+
+const forge = new ForgeData();
+console.log(forge.person.fullName());
+console.log(forge.internet.email());</code></pre>
+        <p>
+          <code>ForgeData</code> is a plain class — create as many independent instances as you like.
+          Each instance owns its own random stream, so seeding one never affects another. There's also
+          a ready-made default instance for quick scripts:
+        </p>
+        <pre><code>import { forge } from "@sahinur/forgedata";
+console.log(forge.person.fullName());</code></pre>
+
+        <h2 id="seeding">Deterministic Seeding</h2>
+        <pre><code>const forge = new ForgeData({ seed: 42 });
+forge.person.fullName(); // always the same value for seed 42
+
+forge.seed(42); // reseed an existing instance</code></pre>
+        <p>Seeds accept a <code>number</code> or a <code>string</code> (strings are hashed into a seed), so you can seed with something readable like a test name.</p>
+
+        <h2 id="locales">Locales</h2>
+        <pre><code>const forge = new ForgeData({ locale: "ja" });
+forge.person.fullName(); // Japanese name pool
+
+forge.locale("fr"); // switch at runtime
+forge.locale();     // "fr" — read the current locale</code></pre>
+        <p>Built-in locales: <code>en</code>, <code>bn</code> (Bangla), <code>hi</code> (Hindi), <code>ar</code> (Arabic), <code>ja</code> (Japanese), <code>fr</code> (French), <code>de</code> (German), <code>es</code> (Spanish), <code>zh</code> (Chinese).</p>
+        <pre><code>forge.defineLocale({
+  code: "pirate",
+  name: "Pirate",
+  person: {
+    firstNamesMale: ["Blackbeard", "Redbeard"],
+    firstNamesFemale: ["Anne", "Mary"],
+    lastNames: ["Silver", "Flint"],
+    jobTitles: ["First Mate"],
+    professions: ["Sailor"],
+  },
+  location: { cities: ["Tortuga"], states: ["Caribbean"], countries: ["Never Land"] },
+  company: { suffixes: ["&amp; Co"], catchPhraseAdjectives: ["Salty"], catchPhraseNouns: ["treasure"] },
+  lorem: { words: ["arr", "matey", "doubloon"] },
+});
+forge.locale("pirate");</code></pre>
+
+        <h2 id="custom-generators">Custom Generators</h2>
+        <pre><code>forge.define("pokemon", (f) => f.pick(["Pikachu", "Bulbasaur", "Charmander"]));
+forge.custom.pokemon(); // "Pikachu"</code></pre>
+
+        <h2 id="unique-values">Unique Values</h2>
+        <pre><code>forge.unique.email();
+forge.unique.username();
+forge.unique.uuid();
+
+const uniqueCity = forge.unique.wrap(() => forge.location.city());
+uniqueCity();
+
+forge.unique.clear(); // forget everything generated so far</code></pre>
+
+        <h2 id="helpers">Helpers &amp; Randomness Utilities</h2>
+        <pre><code>forge.uuid();
+forge.shuffle([1, 2, 3]);
+forge.pick(["a", "b", "c"]);
+forge.pickMultiple(["a", "b", "c", "d"], 2);
+forge.randomEnum(MyEnum);
+forge.probability(0.3);
+forge.weighted([
+  { weight: 9, value: "common" },
+  { weight: 1, value: "rare" },
+]);
+forge.randomArray(() => forge.person.fullName(), 5);
+forge.listGenerators(); // every "module.method" id (111+)
+forge.invoke("person", "fullName"); // dynamic dispatch</code></pre>
+
+        <h2 id="api-reference">API Reference</h2>
+        <p><code>new ForgeData(options?)</code></p>
+        <table>
+          <thead><tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>seed</code></td><td><code>number | string</code></td><td>random</td><td>Makes every generator on this instance deterministic.</td></tr>
+            <tr><td><code>locale</code></td><td><code>string</code></td><td><code>"en"</code></td><td>Starting locale code.</td></tr>
+          </tbody>
+        </table>
+
+        <p>Every module below is a plain class instantiated once per <code>ForgeData</code>:</p>
+        <table>
+          <thead><tr><th>Module</th><th>Example methods</th></tr></thead>
+          <tbody>
+            <tr><td><code>person</code></td><td>firstName, lastName, fullName, gender, jobTitle, profession</td></tr>
+            <tr><td><code>internet</code></td><td>email, username, password, url, domain, ipv4, ipv6, mac, userAgent, jwt, apiKey, jwtSecret</td></tr>
+            <tr><td><code>company</code></td><td>name, catchPhrase, logo</td></tr>
+            <tr><td><code>finance</code></td><td>currency, amount, creditCardNumber, creditCardCVV, iban, bitcoinAddress, ethereumAddress, cryptoCoin, stockSymbol</td></tr>
+            <tr><td><code>location</code></td><td>country, state, city, zipCode, latitude, longitude, timezone, airport</td></tr>
+            <tr><td><code>commerce</code></td><td>productName, price, department, isbn, barcode</td></tr>
+            <tr><td><code>phone</code></td><td>number, imei</td></tr>
+            <tr><td><code>date</code></td><td>past, future, recent, birthdate, month, weekday, between</td></tr>
+            <tr><td><code>image</code></td><td>avatar, url, category, dataUri</td></tr>
+            <tr><td><code>lorem</code></td><td>word(s), sentence(s), paragraph(s), slug, markdown, html</td></tr>
+            <tr><td><code>color</code></td><td>hex, rgb, rgba, hsl, cssColorName, tailwindColor, materialColor, svgPattern</td></tr>
+            <tr><td><code>vehicle</code></td><td>manufacturer, model, type, vin</td></tr>
+            <tr><td><code>animal</code></td><td>type, name</td></tr>
+            <tr><td><code>science</code></td><td>unit, chemicalElement</td></tr>
+            <tr><td><code>ai</code></td><td>prompt, chatConversation, codeSnippet, sqlQuery, json, markdown, apiResponse, logLine, commitMessage, issueTitle, prDescription</td></tr>
+            <tr><td><code>misc</code></td><td>emoji, hashtag, programmingLanguage, githubUsername, gitCommitHash, semver, dockerImageName, npmPackageName, otp, licenseKey, qrData, movie, book, music, food, holiday, university</td></tr>
+          </tbody>
+        </table>
+        <p>Full method signatures live next to each implementation in <code>src/&lt;module&gt;/index.ts</code> with JSDoc, and in the repo's <a href="https://github.com/devSahinur/ForgeData/blob/main/docs/api-reference.md">docs/api-reference.md</a>.</p>
+
+        <h2 id="react">React Integration</h2>
+        <pre><code>npm install @sahinur/forgedata react</code></pre>
+        <pre><code>import { ForgeDataProvider } from "@sahinur/forgedata/react";
+
+function App() {
+  return (
+    &lt;ForgeDataProvider seed={42} locale="en"&gt;
+      &lt;Dashboard /&gt;
+    &lt;/ForgeDataProvider&gt;
+  );
+}</code></pre>
+        <table>
+          <thead><tr><th>Prop</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>seed</code></td><td><code>number | string</code></td><td>Passed to <code>new ForgeData({ seed })</code>.</td></tr>
+            <tr><td><code>locale</code></td><td><code>string</code></td><td>Passed to <code>new ForgeData({ locale })</code>.</td></tr>
+            <tr><td><code>instance</code></td><td><code>ForgeData</code></td><td>Reuse an instance you already constructed.</td></tr>
+          </tbody>
+        </table>
+        <pre><code>import { useGenerator } from "@sahinur/forgedata/react";
+
+function UserCard({ userId }) {
+  const user = useGenerator(
+    (forge) => ({
+      name: forge.person.fullName(),
+      email: forge.internet.email(),
+    }),
+    [userId], // regenerate only when userId changes
+  );
+  return &lt;p&gt;{user.name} — {user.email}&lt;/p&gt;;
+}</code></pre>
+        <p>
+          <code>useForgeData()</code> works even without a <code>ForgeDataProvider</code> (it falls back
+          to a shared default instance). <code>react</code> is an optional peer dependency — the main
+          <code>@sahinur/forgedata</code> entry point never imports it.
+        </p>
+
+        <h2 id="cli">CLI Reference</h2>
+        <pre><code>npx --package=@sahinur/forgedata forgedata --help</code></pre>
+        <pre><code>forgedata v0.1.0 — fake data from the command line
+
+Usage:
+  forgedata list [--module &lt;name&gt;] [--json]
+  forgedata generate &lt;module.method&gt; [--count &lt;n&gt;] [--seed &lt;seed&gt;] [--locale &lt;code&gt;] [--json]
+  forgedata --help
+  forgedata --version</code></pre>
+        <pre><code>forgedata list --module person
+forgedata generate person.fullName
+forgedata generate internet.email --count 5 --seed 42
+forgedata generate location.country --locale ja --json</code></pre>
+        <table>
+          <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>--count &lt;n&gt;</code></td><td>Generate <code>n</code> values (default 1). Must be a positive integer.</td></tr>
+            <tr><td><code>--seed &lt;seed&gt;</code></td><td>Seed the underlying instance for reproducible output.</td></tr>
+            <tr><td><code>--locale &lt;code&gt;</code></td><td>Use a built-in locale.</td></tr>
+            <tr><td><code>--json</code></td><td>Print JSON instead of plain lines.</td></tr>
+          </tbody>
+        </table>
+        <p>Install globally for the short command: <code>npm install -g @sahinur/forgedata</code>, then just run <code>forgedata ...</code>.</p>
+
+        <h2 id="migration-guide">Migration from Faker.js</h2>
+        <table>
+          <thead><tr><th>Faker.js</th><th>ForgeData</th></tr></thead>
+          <tbody>
+            <tr><td><code>faker.person.fullName()</code></td><td><code>forge.person.fullName()</code></td></tr>
+            <tr><td><code>faker.internet.email()</code></td><td><code>forge.internet.email()</code></td></tr>
+            <tr><td><code>faker.internet.userName()</code></td><td><code>forge.internet.username()</code></td></tr>
+            <tr><td><code>faker.helpers.arrayElement(arr)</code></td><td><code>forge.pick(arr)</code></td></tr>
+            <tr><td><code>faker.seed(42)</code></td><td><code>new ForgeData({ seed: 42 })</code></td></tr>
+            <tr><td><code>faker.setLocale("de")</code></td><td><code>forge.locale("de")</code></td></tr>
+          </tbody>
+        </table>
+        <p>Key differences: ForgeData is instance-based (no required global singleton), ships a built-in React integration and CLI that Faker.js doesn't have, and covers 9 locales rather than 100+ — extend with <code>forge.defineLocale()</code> for anything domain-specific. Full guide in <a href="https://github.com/devSahinur/ForgeData/blob/main/docs/migration-guide.md">docs/migration-guide.md</a>.</p>
+
+        <h2 id="contributing">Contributing</h2>
+        <pre><code>git clone https://github.com/devSahinur/ForgeData.git
+cd ForgeData
+npm install
+npm run preflight   # lint + typecheck + 100%-coverage tests + build</code></pre>
+        <p>
+          CI enforces 100% statement/branch/function/line coverage. Commit messages follow
+          <a href="https://www.conventionalcommits.org/">Conventional Commits</a> — semantic-release
+          derives the next version and changelog entry from them. Full guide in
+          <a href="https://github.com/devSahinur/ForgeData/blob/main/docs/contributing.md">docs/contributing.md</a>.
+        </p>
+      </main>
+    </div>
+
+    <footer class="border-t border-slate-200 py-10 dark:border-slate-800">
+      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-500 sm:flex-row">
+        <p>&copy; 2026 ForgeData Contributors &middot; MIT License</p>
+        <div class="flex gap-6">
+          <a href="./index.html" class="hover:text-slate-900 dark:hover:text-white">Home</a>
+          <a href="https://github.com/devSahinur/ForgeData" class="hover:text-slate-900 dark:hover:text-white">GitHub</a>
+          <a href="https://www.npmjs.com/package/@sahinur/forgedata" class="hover:text-slate-900 dark:hover:text-white">npm</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("theme-toggle").addEventListener("click", () => {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.theme = isDark ? "dark" : "light";
+      });
+    </script>
+  </body>
+</html>

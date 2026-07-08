@@ -2,6 +2,8 @@
 
 A modern, modular, tree-shakable, zero-runtime-dependency fake data generator for TypeScript and JavaScript. A production-ready alternative to Faker.js — with React integration and a CLI built in.
 
+**[Website & Docs](https://devsahinur.github.io/ForgeData/)** · **[npm](https://www.npmjs.com/package/@sahinur/forgedata)** · **[GitHub](https://github.com/devSahinur/ForgeData)**
+
 - **100+ generators** across 16 modules (`forge.listGenerators()` to see every one)
 - **Zero runtime dependencies**
 - **ESM + CommonJS**, one package
@@ -219,6 +221,19 @@ npm run cli -- list      # run the CLI from source during development
 ```
 
 See [docs/](./docs) for the getting-started guide, full API reference, React guide, CLI reference, migration guide from Faker.js, and contributing guide. See [examples/](./examples) for runnable Node, browser, React, and CLI samples.
+
+## Website
+
+`site/` is a plain HTML + Tailwind CSS landing page and single-page documentation site (no framework, no build step beyond compiling CSS):
+
+```bash
+cd site
+npm install
+npm run build   # compiles src/input.css -> dist/output.css
+npm run serve   # or just open index.html directly once dist/output.css exists
+```
+
+`.github/workflows/pages.yml` builds and deploys `site/` to GitHub Pages on every push to `main` that touches it — enable it once via **Settings → Pages → Source → GitHub Actions**.
 
 ## Publishing
 

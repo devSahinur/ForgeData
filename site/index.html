@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeData — a modern, zero-dependency fake data generator</title>
+    <meta
+      name="description"
+      content="ForgeData is a modular, tree-shakable, zero-runtime-dependency fake data generator for TypeScript and JavaScript. 100+ generators, 9 locales, seeding, React integration, and a CLI."
+    />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>⚒️</text></svg>" />
+    <link rel="stylesheet" href="./dist/output.css" />
+    <script>
+      // Applied before paint to avoid a light/dark flash on load.
+      if (localStorage.theme === "light") document.documentElement.classList.remove("dark");
+    </script>
+  </head>
+  <body class="antialiased">
+    <!-- Nav -->
+    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/80">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="./index.html" class="flex items-center gap-2 text-lg font-bold">
+          <span aria-hidden="true">⚒️</span>
+          <span>ForgeData</span>
+        </a>
+        <nav class="hidden items-center gap-8 md:flex">
+          <a href="./docs.html" class="nav-link">Docs</a>
+          <a href="./docs.html#api-reference" class="nav-link">API</a>
+          <a href="./docs.html#cli" class="nav-link">CLI</a>
+          <a href="./docs.html#react" class="nav-link">React</a>
+          <a href="https://github.com/devSahinur/ForgeData" class="nav-link">GitHub</a>
+          <a href="https://www.npmjs.com/package/@sahinur/forgedata" class="nav-link">npm</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button
+            id="theme-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            class="rounded-lg border border-slate-300 p-2 text-slate-600 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900"
+          >
+            <svg id="icon-sun" class="hidden h-5 w-5 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+            </svg>
+            <svg id="icon-moon" class="block h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646Z" />
+            </svg>
+          </button>
+          <a href="./docs.html" class="btn-primary hidden sm:inline-flex">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 text-center">
+      <p class="pill mb-6">v0.1.0 &middot; 111+ generators &middot; 100% test coverage</p>
+      <h1 class="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
+        Fake data that feels
+        <span class="bg-gradient-to-r from-brand-600 to-fuchsia-500 bg-clip-text text-transparent dark:from-brand-400 dark:to-fuchsia-400">real</span>,
+        ships
+        <span class="bg-gradient-to-r from-brand-600 to-fuchsia-500 bg-clip-text text-transparent dark:from-brand-400 dark:to-fuchsia-400">light</span>.
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+        A modular, tree-shakable, zero-runtime-dependency fake data generator for TypeScript and
+        JavaScript — a production-ready alternative to Faker.js, with React integration and a CLI built in.
+      </p>
+
+      <div class="mx-auto mt-10 max-w-lg">
+        <div class="code-block flex items-center justify-between gap-4 text-left font-mono">
+          <code id="install-cmd">npm install @sahinur/forgedata</code>
+          <button
+            id="copy-btn"
+            type="button"
+            class="shrink-0 rounded-md border border-slate-700 px-2 py-1 text-xs text-slate-300 transition hover:bg-slate-800"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="./docs.html" class="btn-primary">Get Started</a>
+        <a href="https://github.com/devSahinur/ForgeData" class="btn-secondary">View on GitHub</a>
+      </div>
+    </section>
+
+    <!-- Quick example -->
+    <section class="mx-auto max-w-6xl px-6 pb-20">
+      <div class="code-block mx-auto max-w-2xl font-mono">
+<pre><span class="text-fuchsia-400">import</span> { ForgeData } <span class="text-fuchsia-400">from</span> <span class="text-emerald-400">"@sahinur/forgedata"</span>;
+
+<span class="text-fuchsia-400">const</span> forge = <span class="text-fuchsia-400">new</span> ForgeData({ seed: <span class="text-amber-400">42</span> });
+
+forge.person.fullName();          <span class="text-slate-500">// "Ava Thompson"</span>
+forge.internet.email();           <span class="text-slate-500">// "ava.thompson@example.com"</span>
+forge.finance.creditCardNumber(); <span class="text-slate-500">// "4539123456781234"</span>
+forge.ai.prompt();                <span class="text-slate-500">// "Explain quantum computing..."</span></pre>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-6xl px-6">
+        <h2 class="text-center text-3xl font-bold">Everything a modern test suite needs</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600 dark:text-slate-400">
+          Built from scratch as a clean-architecture alternative to Faker.js — not a fork.
+        </p>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">🧩</div>
+            <h3 class="text-lg font-semibold">111+ generators</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              16 modules — person, internet, finance, location, commerce, date, lorem, color,
+              vehicle, ai, and more. Discoverable at runtime via <code>forge.listGenerators()</code>.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">📦</div>
+            <h3 class="text-lg font-semibold">Zero runtime dependencies</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Only web-standard APIs (<code>btoa</code>, <code>Math</code>, <code>Date</code>) — nothing to audit, nothing to break.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">🌲</div>
+            <h3 class="text-lg font-semibold">Tree-shakable</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Import only the modules and helpers you use. ESM + CommonJS, one package.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">🌍</div>
+            <h3 class="text-lg font-semibold">Runs everywhere</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Node.js 18+, Bun, Deno, and every modern browser — no runtime-specific APIs.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">🎯</div>
+            <h3 class="text-lg font-semibold">Deterministic seeding</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              <code>new ForgeData({ seed: 42 })</code> — identical output every run, for stable tests and snapshots.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">🗺️</div>
+            <h3 class="text-lg font-semibold">9 built-in locales</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              en, bn, hi, ar, ja, fr, de, es, zh — plus a custom locale API for anything else.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">⚛️</div>
+            <h3 class="text-lg font-semibold">React integration</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              <code>ForgeDataProvider</code>, <code>useForgeData()</code>, <code>useGenerator()</code> at the <code>/react</code> subpath. React stays an optional peer dependency.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">⌨️</div>
+            <h3 class="text-lg font-semibold">Built-in CLI</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              <code>forgedata generate person.fullName --seed 42</code> — generate fake data without writing a script.
+            </p>
+          </div>
+          <div class="card">
+            <div class="mb-4 text-2xl" aria-hidden="true">✅</div>
+            <h3 class="text-lg font-semibold">100% test coverage</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Statements, branches, functions, and lines — enforced in CI, not just claimed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modules -->
+    <section class="mx-auto max-w-6xl px-6 py-20">
+      <h2 class="text-center text-3xl font-bold">16 modules, one import</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600 dark:text-slate-400">
+        Every module is a small, dependency-free class instantiated once per <code>ForgeData</code>.
+      </p>
+
+      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="card !p-4"><p class="font-semibold">person</p><p class="mt-1 font-mono text-xs text-slate-500">fullName(), jobTitle()</p></div>
+        <div class="card !p-4"><p class="font-semibold">internet</p><p class="mt-1 font-mono text-xs text-slate-500">email(), jwt()</p></div>
+        <div class="card !p-4"><p class="font-semibold">company</p><p class="mt-1 font-mono text-xs text-slate-500">name(), catchPhrase()</p></div>
+        <div class="card !p-4"><p class="font-semibold">finance</p><p class="mt-1 font-mono text-xs text-slate-500">creditCardNumber()</p></div>
+        <div class="card !p-4"><p class="font-semibold">location</p><p class="mt-1 font-mono text-xs text-slate-500">city(), airport()</p></div>
+        <div class="card !p-4"><p class="font-semibold">commerce</p><p class="mt-1 font-mono text-xs text-slate-500">productName(), isbn()</p></div>
+        <div class="card !p-4"><p class="font-semibold">phone</p><p class="mt-1 font-mono text-xs text-slate-500">number(), imei()</p></div>
+        <div class="card !p-4"><p class="font-semibold">date</p><p class="mt-1 font-mono text-xs text-slate-500">past(), birthdate()</p></div>
+        <div class="card !p-4"><p class="font-semibold">image</p><p class="mt-1 font-mono text-xs text-slate-500">avatar(), dataUri()</p></div>
+        <div class="card !p-4"><p class="font-semibold">lorem</p><p class="mt-1 font-mono text-xs text-slate-500">sentence(), markdown()</p></div>
+        <div class="card !p-4"><p class="font-semibold">color</p><p class="mt-1 font-mono text-xs text-slate-500">hex(), tailwindColor()</p></div>
+        <div class="card !p-4"><p class="font-semibold">vehicle</p><p class="mt-1 font-mono text-xs text-slate-500">manufacturer(), vin()</p></div>
+        <div class="card !p-4"><p class="font-semibold">animal</p><p class="mt-1 font-mono text-xs text-slate-500">type(), name()</p></div>
+        <div class="card !p-4"><p class="font-semibold">science</p><p class="mt-1 font-mono text-xs text-slate-500">chemicalElement()</p></div>
+        <div class="card !p-4"><p class="font-semibold">ai</p><p class="mt-1 font-mono text-xs text-slate-500">prompt(), sqlQuery()</p></div>
+        <div class="card !p-4"><p class="font-semibold">misc</p><p class="mt-1 font-mono text-xs text-slate-500">emoji(), semver()</p></div>
+      </div>
+      <p class="mt-8 text-center">
+        <a href="./docs.html#api-reference" class="nav-link underline">See the full API reference →</a>
+      </p>
+    </section>
+
+    <!-- CLI + React showcase -->
+    <section class="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40">
+      <div class="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2">
+        <div>
+          <h3 class="text-xl font-bold">From your terminal</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            The <code>forgedata</code> CLI walks the real module classes — never a hand-maintained,
+            driftable list of commands.
+          </p>
+          <div class="code-block mt-6 font-mono text-sm">
+<pre><span class="text-slate-500"># npx --package=@sahinur/forgedata forgedata ...</span>
+$ forgedata generate person.fullName --seed 42
+Donald Martinez
+
+$ forgedata generate internet.email --count 3
+donald.martinez@gmail.com
+scott.perez@protonmail.com
+ashleyrodriguez@example.com
+
+$ forgedata list --module color --json
+["color.cssColorName", "color.hex", "color.hsl", ...]</pre>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold">From your React app</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            <code>@sahinur/forgedata/react</code> is a separate entry point — the main package never imports React.
+          </p>
+          <div class="code-block mt-6 font-mono text-sm">
+<pre><span class="text-fuchsia-400">import</span> { ForgeDataProvider, useGenerator } <span class="text-fuchsia-400">from</span>
+  <span class="text-emerald-400">"@sahinur/forgedata/react"</span>;
+
+<span class="text-fuchsia-400">function</span> UserCard() {
+  <span class="text-fuchsia-400">const</span> user = useGenerator(
+    (forge) => ({ name: forge.person.fullName() }),
+    [],
+  );
+  <span class="text-fuchsia-400">return</span> &lt;p&gt;{user.name}&lt;/p&gt;;
+}</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="mx-auto max-w-4xl px-6 py-20">
+      <h2 class="text-center text-3xl font-bold">How it compares</h2>
+      <div class="mt-10 overflow-x-auto">
+        <table class="w-full border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-slate-200 dark:border-slate-800">
+              <th class="py-3 pr-4 font-semibold"></th>
+              <th class="py-3 px-4 font-semibold">ForgeData</th>
+              <th class="py-3 pl-4 font-semibold text-slate-500">Faker.js</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+            <tr><td class="py-3 pr-4 text-slate-600 dark:text-slate-400">Runtime dependencies</td><td class="py-3 px-4">Zero</td><td class="py-3 pl-4 text-slate-500">Zero</td></tr>
+            <tr><td class="py-3 pr-4 text-slate-600 dark:text-slate-400">Built-in CLI</td><td class="py-3 px-4">✅</td><td class="py-3 pl-4 text-slate-500">❌</td></tr>
+            <tr><td class="py-3 pr-4 text-slate-600 dark:text-slate-400">React hooks</td><td class="py-3 px-4">✅</td><td class="py-3 pl-4 text-slate-500">❌</td></tr>
+            <tr><td class="py-3 pr-4 text-slate-600 dark:text-slate-400">Generator introspection</td><td class="py-3 px-4"><code>listGenerators()</code></td><td class="py-3 pl-4 text-slate-500">—</td></tr>
+            <tr><td class="py-3 pr-4 text-slate-600 dark:text-slate-400">Enforced 100% coverage</td><td class="py-3 px-4">✅</td><td class="py-3 pl-4 text-slate-500">—</td></tr>
+            <tr><td class="py-3 pr-4 text-slate-600 dark:text-slate-400">Locale count</td><td class="py-3 px-4">9</td><td class="py-3 pl-4 text-slate-500">100+</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-xs text-slate-500">
+        Faker.js ships far more locales — see the <a href="./docs.html#migration-guide" class="underline">migration guide</a> for the full picture.
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <section class="border-t border-slate-200 py-20 text-center dark:border-slate-800">
+      <h2 class="text-3xl font-bold">Ready to forge some data?</h2>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="./docs.html" class="btn-primary">Read the docs</a>
+        <a href="https://www.npmjs.com/package/@sahinur/forgedata" class="btn-secondary">View on npm</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 py-10 dark:border-slate-800">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-500 sm:flex-row">
+        <p>&copy; 2026 ForgeData Contributors &middot; MIT License</p>
+        <div class="flex gap-6">
+          <a href="./docs.html" class="hover:text-slate-900 dark:hover:text-white">Docs</a>
+          <a href="https://github.com/devSahinur/ForgeData" class="hover:text-slate-900 dark:hover:text-white">GitHub</a>
+          <a href="https://www.npmjs.com/package/@sahinur/forgedata" class="hover:text-slate-900 dark:hover:text-white">npm</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById("theme-toggle");
+      toggle.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.theme = isDark ? "dark" : "light";
+      });
+
+      const copyBtn = document.getElementById("copy-btn");
+      copyBtn.addEventListener("click", async () => {
+        await navigator.clipboard.writeText("npm install @sahinur/forgedata");
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => (copyBtn.textContent = "Copy"), 1500);
+      });
+    </script>
+  </body>
+</html>

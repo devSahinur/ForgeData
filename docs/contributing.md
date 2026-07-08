@@ -38,6 +38,10 @@ CI enforces 100% statement/branch/function/line coverage (excluding the two-line
 
 Core argument parsing/dispatch logic lives in `src/cli-core.ts` (fully unit tested — see `tests/cli.test.ts`). `src/cli.ts` is only the `process.argv`/shebang shim and is excluded from coverage; keep it that thin.
 
+## Working on the website
+
+`site/` is a separate, plain HTML + Tailwind CSS project (its own `package.json`, not part of the published npm package). `cd site && npm install && npm run dev` watches and rebuilds `dist/output.css`. Deployed to GitHub Pages by `.github/workflows/pages.yml` on push to `main`.
+
 ## Working on the React integration
 
 `src/react/index.tsx` is a separate tsup entry (`@sahinur/forgedata/react`) with `react` as an external peer dependency — never import it from `src/index.ts`. Test with `@testing-library/react` + jsdom (`// @vitest-environment jsdom` at the top of the test file).
