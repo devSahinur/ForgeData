@@ -33,6 +33,7 @@ A production-ready alternative to Faker.js — with React integration and a CLI 
 - **Seedable** — deterministic output for tests and snapshots
 - **9 built-in locales**, plus a custom locale API
 - **Custom generators** via `forge.define(...)`
+- **Schema-based generation** (`@sahinur/forgedata/zod`): fake data straight from a Zod schema
 - **React integration** (`@sahinur/forgedata/react`): a provider + two hooks
 - **CLI** (`forgedata`): generate fake data from your terminal or scripts
 - **100% test coverage** (statements/branches/functions/lines)
@@ -47,6 +48,7 @@ A production-ready alternative to Faker.js — with React integration and a CLI 
 - [Unique values](#unique-values)
 - [Helpers & randomness utilities](#helpers--randomness-utilities)
 - [Generator introspection](#generator-introspection)
+- [Zod schema generation](#zod-schema-generation)
 - [React integration](#react-integration)
 - [CLI](#cli)
 - [Modules](#modules)
@@ -179,6 +181,36 @@ forge.invoke("person", "fullName"); // same as forge.person.fullName()
 
 This is what the CLI is built on.
 
+## Zod schema generation
+
+```bash
+npm install @sahinur/forgedata zod
+```
+
+```ts
+import { z } from "zod";
+import { fromZodSchema } from "@sahinur/forgedata/zod";
+
+const UserSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string(),
+  email: z.string().email(),
+  age: z.number().int().min(18).max(99),
+  role: z.enum(["admin", "user", "guest"]),
+  tags: z.array(z.string()).min(1).max(3),
+  bio: z.string().max(140).optional(),
+});
+
+const user = fromZodSchema(forge, UserSchema);
+// fully typed as z.infer<typeof UserSchema> — every field respects the
+// schema's constraints: a valid uuid, a real-looking email, age in [18, 99],
+// one of the three enum values, 1-3 tags, bio present ~80% of the time.
+```
+
+Supports the full range of Zod v4 schema types recursively: primitives (with format-aware strings — `.email()`, `.url()`, `.uuid()`, `.datetime()`, `.ipv4()`, `.jwt()`, and more — plus `.min()`/`.max()`/`.length()`), `object`, `array`, `tuple`, `record`, `map`, `set`, `enum`/native enums, `literal`, `union`/discriminated union, `optional`/`nullable`/`default`/`catch`, and recursive schemas via `z.lazy()` (depth-capped, so a self-referential schema can't blow the stack).
+
+`.transform()`/`.pipe()` are run through the schema's real `safeParse()` after generation, so the output reflects the actual post-transform shape. Arbitrary `.refine()` predicates aren't evaluated ahead of time — a generated value can occasionally fail one, in which case the raw (pre-refine) value is returned rather than throwing. `zod` is an optional peer dependency (`^4.0.0`); the main `@sahinur/forgedata` entry point never imports it, exactly like the React integration.
+
 ## React integration
 
 ```tsx
@@ -252,7 +284,7 @@ ForgeData avoids Node-only APIs in `src/` — it uses only `btoa`, `Math`/`Date`
 
 ```bash
 npm install
-npm run build            # tsup -> dist (ESM + CJS + .d.ts, for index/react/cli)
+npm run build            # tsup -> dist (ESM + CJS + .d.ts, for index/react/zod/cli)
 npm run test:coverage    # vitest, enforces 100% coverage thresholds
 npm run lint
 npm run bench            # micro-benchmark, compares against faker if installed

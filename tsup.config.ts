@@ -29,6 +29,20 @@ export default defineConfig([
     },
   },
   {
+    entry: { "zod/index": "src/zod/index.ts" },
+    format: ["esm", "cjs"],
+    dts: true,
+    sourcemap: true,
+    clean: false,
+    splitting: false,
+    treeshake: true,
+    target: "es2020",
+    external: ["zod"],
+    outExtension({ format }) {
+      return { js: format === "cjs" ? ".cjs" : ".js" };
+    },
+  },
+  {
     entry: { cli: "src/cli.ts" },
     format: ["esm"],
     dts: false,

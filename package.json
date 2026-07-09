@@ -12,7 +12,9 @@
     "typescript",
     "generator",
     "react",
-    "cli"
+    "cli",
+    "zod",
+    "schema"
   ],
   "license": "MIT",
   "type": "module",
@@ -34,12 +36,20 @@
       "import": "./dist/react/index.js",
       "require": "./dist/react/index.cjs"
     },
+    "./zod": {
+      "types": "./dist/zod/index.d.ts",
+      "import": "./dist/zod/index.js",
+      "require": "./dist/zod/index.cjs"
+    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
       "react": [
         "dist/react/index.d.ts"
+      ],
+      "zod": [
+        "dist/zod/index.d.ts"
       ]
     }
   },
@@ -73,10 +83,14 @@
     "semantic-release": "semantic-release"
   },
   "peerDependencies": {
-    "react": ">=17.0.0"
+    "react": ">=17.0.0",
+    "zod": "^4.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
+      "optional": true
+    },
+    "zod": {
       "optional": true
     }
   },
@@ -100,7 +114,8 @@
     "tsup": "^8.2.4",
     "tsx": "^4.16.2",
     "typescript": "^5.5.4",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "zod": "^4.4.3"
   },
   "repository": {
     "type": "git",

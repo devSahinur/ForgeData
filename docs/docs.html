@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Documentation — ForgeData</title>
-    <meta name="description" content="ForgeData documentation: getting started, full API reference, React integration, CLI reference, and a migration guide from Faker.js." />
+    <meta name="description" content="ForgeData documentation: getting started, full API reference, Zod schema generation, React integration, CLI reference, and a migration guide from Faker.js." />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>⚒️</text></svg>" />
     <link rel="stylesheet" href="./dist/output.css" />
     <script>
@@ -62,6 +62,7 @@
           <a href="#unique-values" class="nav-link py-1">Unique Values</a>
           <a href="#helpers" class="nav-link py-1">Helpers</a>
           <a href="#api-reference" class="nav-link py-1">API Reference</a>
+          <a href="#zod" class="nav-link py-1">Zod Schema Generation</a>
           <a href="#react" class="nav-link py-1">React Integration</a>
           <a href="#cli" class="nav-link py-1">CLI Reference</a>
           <a href="#migration-guide" class="nav-link py-1">Migration from Faker.js</a>
@@ -84,6 +85,7 @@
 
           <p class="mb-1 mt-4 font-semibold text-slate-400">Reference</p>
           <a href="#api-reference" class="nav-link py-1">API Reference</a>
+          <a href="#zod" class="nav-link py-1">Zod Schema Generation</a>
           <a href="#react" class="nav-link py-1">React Integration</a>
           <a href="#cli" class="nav-link py-1">CLI Reference</a>
 
@@ -98,7 +100,7 @@
         <h1>Documentation</h1>
         <p>Everything you need to install, seed, extend, and ship fake data with ForgeData.</p>
 
-        <div class="not-prose my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="not-prose my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <a href="#getting-started" class="card !p-4 no-underline">
             <p class="text-sm font-semibold">🚀 Getting Started</p>
             <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Install and generate your first fake data.</p>
@@ -106,6 +108,10 @@
           <a href="#api-reference" class="card !p-4 no-underline">
             <p class="text-sm font-semibold">📚 API Reference</p>
             <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">All 16 modules and 111+ generators.</p>
+          </a>
+          <a href="#zod" class="card !p-4 no-underline">
+            <p class="text-sm font-semibold">🧬 Zod Schema Generation</p>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Fake data straight from a Zod schema.</p>
           </a>
           <a href="#react" class="card !p-4 no-underline">
             <p class="text-sm font-semibold">⚛️ React Integration</p>
@@ -225,6 +231,43 @@ forge.invoke("person", "fullName"); // dynamic dispatch</code></pre>
         </table>
         <p>Full method signatures live next to each implementation in <a href="https://github.com/devSahinur/ForgeData/tree/main/src"><code>src/&lt;module&gt;/index.ts</code></a> with JSDoc.</p>
 
+        <h2 id="zod">Zod Schema Generation</h2>
+        <pre><code>npm install @sahinur/forgedata zod</code></pre>
+        <pre><code>import { z } from "zod";
+import { fromZodSchema } from "@sahinur/forgedata/zod";
+
+const UserSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string(),
+  email: z.string().email(),
+  age: z.number().int().min(18).max(99),
+  role: z.enum(["admin", "user", "guest"]),
+  tags: z.array(z.string()).min(1).max(3),
+  bio: z.string().max(140).optional(),
+});
+
+const user = fromZodSchema(forge, UserSchema);
+// fully typed as z.infer&lt;typeof UserSchema&gt; — every field respects the
+// schema's constraints automatically.</code></pre>
+        <p>
+          Supports the full range of Zod v4 schema types recursively: primitives (with format-aware
+          strings — <code>.email()</code>, <code>.url()</code>, <code>.uuid()</code>, <code>.datetime()</code>,
+          <code>.ipv4()</code>, <code>.jwt()</code>, and more — plus <code>.min()</code>/<code>.max()</code>/
+          <code>.length()</code>), <code>object</code>, <code>array</code>, <code>tuple</code>,
+          <code>record</code>, <code>map</code>, <code>set</code>, <code>enum</code>/native enums,
+          <code>literal</code>, <code>union</code>/discriminated union, <code>optional</code>/
+          <code>nullable</code>/<code>default</code>/<code>catch</code>, and recursive schemas via
+          <code>z.lazy()</code> (depth-capped, so a self-referential schema can't blow the stack).
+        </p>
+        <p>
+          <code>.transform()</code>/<code>.pipe()</code> are run through the schema's real
+          <code>safeParse()</code> after generation, so the output reflects the actual post-transform
+          shape. Arbitrary <code>.refine()</code> predicates aren't evaluated ahead of time — a
+          generated value can occasionally fail one, in which case the raw pre-refine value is
+          returned rather than throwing. <code>zod</code> is an optional peer dependency
+          (<code>^4.0.0</code>); the main <code>@sahinur/forgedata</code> entry point never imports it.
+        </p>
+
         <h2 id="react">React Integration</h2>
         <pre><code>npm install @sahinur/forgedata react</code></pre>
         <pre><code>import { ForgeDataProvider } from "@sahinur/forgedata/react";
@@ -264,7 +307,7 @@ function UserCard({ userId }) {
 
         <h2 id="cli">CLI Reference</h2>
         <pre><code>npx --package=@sahinur/forgedata forgedata --help</code></pre>
-        <pre><code>forgedata v0.1.0 — fake data from the command line
+        <pre><code>forgedata v0.2.0 — fake data from the command line
 
 Usage:
   forgedata list [--module &lt;name&gt;] [--json]
