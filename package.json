@@ -1,6 +1,6 @@
 {
   "name": "@sahinur/forgedata",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A modern, modular, tree-shakable, zero-dependency fake data generator for TypeScript and JavaScript. A production-ready alternative to Faker.js with React integration and a CLI.",
   "keywords": [
     "faker",
