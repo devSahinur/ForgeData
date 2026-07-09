@@ -4,7 +4,7 @@ import { ForgeData } from "./ForgeData.js";
 // JSON import assertions are still inconsistent across Node/Bun/Deno/bundlers,
 // and this is purely cosmetic output for `--version`. Bump it alongside the
 // version field in package.json on release.
-export const CLI_VERSION = "0.1.1";
+export const CLI_VERSION = "0.2.0";
 
 export interface ParsedArgs {
   command?: string;

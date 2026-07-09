@@ -11,7 +11,30 @@ From this point forward, entries in this file are generated automatically by
 `.releaserc.json` and the docs site's [Contributing](https://devsahinur.github.io/ForgeData/docs.html#contributing)
 section. New entries are prepended above this line by CI; do not hand-edit past releases.
 
-## [0.1.0] - Unreleased
+## [0.2.0] - 2026-07-09
+
+### Added
+
+- Zod v4 schema-based generation at the `@sahinur/forgedata/zod` subpath:
+  `fromZodSchema(forge, schema)` generates a fake value matching any Zod
+  schema, fully typed via `z.infer<T>`. Covers primitives (format-aware
+  strings, number min/max/int), `object`/`array`/`tuple`/`record`/`map`/`set`,
+  `enum`/native enum, `literal`, `union`/discriminated union,
+  `optional`/`nullable`/`default`/`catch`, and recursive schemas via
+  `z.lazy()` (depth-capped). `.transform()`/`.pipe()` are run through the
+  schema's real `safeParse()` so output reflects the actual post-transform
+  shape. `zod` is an optional peer dependency (`^4.0.0`); the main entry
+  point never imports it, exactly like the React integration.
+
+## [0.1.1] - 2026-07-09
+
+### Fixed
+
+- `bin` path and `typesVersions` formatting cleaned up per `npm pkg fix`.
+- Bumped `@typescript-eslint` to v8 to clear a TypeScript-version support
+  warning under TS 5.9+.
+
+## [0.1.0] - 2026-07-09
 
 Initial release. Published as the scoped package `@sahinur/forgedata` — the
 unscoped `forgedata` name is blocked by npm's anti-typosquatting policy
@@ -43,4 +66,6 @@ itself is still the short `forgedata` regardless of package scope.
 - Zero runtime dependencies; only web-standard APIs (`btoa`, etc.) so the
   package runs unmodified on Node.js 18+, Bun, Deno, and in browsers.
 
+[0.2.0]: https://github.com/devSahinur/ForgeData/releases/tag/v0.2.0
+[0.1.1]: https://github.com/devSahinur/ForgeData/releases/tag/v0.1.1
 [0.1.0]: https://github.com/devSahinur/ForgeData/releases/tag/v0.1.0
