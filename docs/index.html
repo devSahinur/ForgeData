@@ -52,41 +52,73 @@
     </header>
 
     <!-- Hero -->
-    <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 text-center">
-      <p class="pill mb-6">v0.1.0 &middot; 111+ generators &middot; 100% test coverage</p>
-      <h1 class="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
-        Fake data that feels
-        <span class="bg-gradient-to-r from-brand-600 to-fuchsia-500 bg-clip-text text-transparent dark:from-brand-400 dark:to-fuchsia-400">real</span>,
-        ships
-        <span class="bg-gradient-to-r from-brand-600 to-fuchsia-500 bg-clip-text text-transparent dark:from-brand-400 dark:to-fuchsia-400">light</span>.
-      </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-        A modular, tree-shakable, zero-runtime-dependency fake data generator for TypeScript and
-        JavaScript — a production-ready alternative to Faker.js, with React integration and a CLI built in.
-      </p>
+    <section class="relative overflow-hidden px-6 pt-20 pb-16 text-center">
+      <div class="blob -left-24 -top-24 h-72 w-72 bg-brand-400" aria-hidden="true"></div>
+      <div class="blob -right-24 top-10 h-96 w-96 bg-fuchsia-400" style="animation-delay: -6s" aria-hidden="true"></div>
 
-      <div class="mx-auto mt-10 max-w-lg">
-        <div class="code-block flex items-center justify-between gap-4 text-left font-mono">
-          <code id="install-cmd">npm install @sahinur/forgedata</code>
-          <button
-            id="copy-btn"
-            type="button"
-            class="shrink-0 rounded-md border border-slate-700 px-2 py-1 text-xs text-slate-300 transition hover:bg-slate-800"
-          >
-            Copy
-          </button>
+      <div class="relative mx-auto max-w-6xl">
+        <p class="pill mb-6">v0.1.0 &middot; 111+ generators &middot; 100% test coverage</p>
+        <h1 class="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
+          Fake data that feels
+          <span class="gradient-text">real</span>,
+          ships
+          <span class="gradient-text">light</span>.
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+          A modular, tree-shakable, zero-runtime-dependency fake data generator for TypeScript and
+          JavaScript — a production-ready alternative to Faker.js, with React integration and a CLI built in.
+        </p>
+
+        <p class="mx-auto mt-4 h-6 max-w-2xl font-mono text-sm text-brand-600 dark:text-brand-400">
+          <span id="hero-ticker"></span><span class="animate-pulse">|</span>
+        </p>
+
+        <div class="mx-auto mt-6 max-w-lg">
+          <div class="code-block flex items-center justify-between gap-4 text-left font-mono">
+            <code id="install-cmd">npm install @sahinur/forgedata</code>
+            <button
+              id="copy-btn"
+              type="button"
+              class="shrink-0 rounded-md border border-slate-700 px-2 py-1 text-xs text-slate-300 transition hover:bg-slate-800"
+            >
+              Copy
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a href="./docs.html" class="btn-primary">Get Started</a>
-        <a href="https://github.com/devSahinur/ForgeData" class="btn-secondary">View on GitHub</a>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="./docs.html" class="btn-primary">Get Started</a>
+          <a href="https://github.com/devSahinur/ForgeData" class="btn-secondary">View on GitHub</a>
+        </div>
+
+        <dl class="mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-6 sm:grid-cols-4" id="stats">
+          <div>
+            <dt class="sr-only">Generators</dt>
+            <dd class="text-3xl font-extrabold" data-count-to="111">0</dd>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Generators</p>
+          </div>
+          <div>
+            <dt class="sr-only">Modules</dt>
+            <dd class="text-3xl font-extrabold" data-count-to="16">0</dd>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Modules</p>
+          </div>
+          <div>
+            <dt class="sr-only">Locales</dt>
+            <dd class="text-3xl font-extrabold" data-count-to="9">0</dd>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Locales</p>
+          </div>
+          <div>
+            <dt class="sr-only">Test coverage</dt>
+            <dd class="text-3xl font-extrabold"><span data-count-to="100">0</span>%</dd>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Test coverage</p>
+          </div>
+        </dl>
       </div>
     </section>
 
     <!-- Quick example -->
     <section class="mx-auto max-w-6xl px-6 pb-20">
-      <div class="code-block mx-auto max-w-2xl font-mono">
+      <div class="code-block mx-auto max-w-2xl font-mono" data-reveal>
 <pre><span class="text-fuchsia-400">import</span> { ForgeData } <span class="text-fuchsia-400">from</span> <span class="text-emerald-400">"@sahinur/forgedata"</span>;
 
 <span class="text-fuchsia-400">const</span> forge = <span class="text-fuchsia-400">new</span> ForgeData({ seed: <span class="text-amber-400">42</span> });
@@ -106,7 +138,7 @@ forge.ai.prompt();                <span class="text-slate-500">// "Explain quant
         <a href="https://esm.sh" class="underline">esm.sh</a> — nothing on this page is precomputed.
       </p>
 
-      <div class="card mt-10 !p-0 overflow-hidden">
+      <div class="card mt-10 !p-0 overflow-hidden" data-reveal>
         <div class="grid gap-6 p-6 lg:grid-cols-[280px_1fr]">
           <div class="space-y-4">
             <label class="block text-sm">
@@ -145,7 +177,7 @@ forge.ai.prompt();                <span class="text-slate-500">// "Explain quant
         </p>
 
         <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">🧩</div>
             <h3 class="text-lg font-semibold">111+ generators</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
@@ -153,56 +185,56 @@ forge.ai.prompt();                <span class="text-slate-500">// "Explain quant
               vehicle, ai, and more. Discoverable at runtime via <code>forge.listGenerators()</code>.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">📦</div>
             <h3 class="text-lg font-semibold">Zero runtime dependencies</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
               Only web-standard APIs (<code>btoa</code>, <code>Math</code>, <code>Date</code>) — nothing to audit, nothing to break.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">🌲</div>
             <h3 class="text-lg font-semibold">Tree-shakable</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
               Import only the modules and helpers you use. ESM + CommonJS, one package.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">🌍</div>
             <h3 class="text-lg font-semibold">Runs everywhere</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
               Node.js 18+, Bun, Deno, and every modern browser — no runtime-specific APIs.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">🎯</div>
             <h3 class="text-lg font-semibold">Deterministic seeding</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
               <code>new ForgeData({ seed: 42 })</code> — identical output every run, for stable tests and snapshots.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">🗺️</div>
             <h3 class="text-lg font-semibold">9 built-in locales</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
               en, bn, hi, ar, ja, fr, de, es, zh — plus a custom locale API for anything else.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">⚛️</div>
             <h3 class="text-lg font-semibold">React integration</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
               <code>ForgeDataProvider</code>, <code>useForgeData()</code>, <code>useGenerator()</code> at the <code>/react</code> subpath. React stays an optional peer dependency.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">⌨️</div>
             <h3 class="text-lg font-semibold">Built-in CLI</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
               <code>forgedata generate person.fullName --seed 42</code> — generate fake data without writing a script.
             </p>
           </div>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="mb-4 text-2xl" aria-hidden="true">✅</div>
             <h3 class="text-lg font-semibold">100% test coverage</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
@@ -221,22 +253,22 @@ forge.ai.prompt();                <span class="text-slate-500">// "Explain quant
       </p>
 
       <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="card !p-4"><p class="font-semibold">person</p><p class="mt-1 font-mono text-xs text-slate-500">fullName(), jobTitle()</p></div>
-        <div class="card !p-4"><p class="font-semibold">internet</p><p class="mt-1 font-mono text-xs text-slate-500">email(), jwt()</p></div>
-        <div class="card !p-4"><p class="font-semibold">company</p><p class="mt-1 font-mono text-xs text-slate-500">name(), catchPhrase()</p></div>
-        <div class="card !p-4"><p class="font-semibold">finance</p><p class="mt-1 font-mono text-xs text-slate-500">creditCardNumber()</p></div>
-        <div class="card !p-4"><p class="font-semibold">location</p><p class="mt-1 font-mono text-xs text-slate-500">city(), airport()</p></div>
-        <div class="card !p-4"><p class="font-semibold">commerce</p><p class="mt-1 font-mono text-xs text-slate-500">productName(), isbn()</p></div>
-        <div class="card !p-4"><p class="font-semibold">phone</p><p class="mt-1 font-mono text-xs text-slate-500">number(), imei()</p></div>
-        <div class="card !p-4"><p class="font-semibold">date</p><p class="mt-1 font-mono text-xs text-slate-500">past(), birthdate()</p></div>
-        <div class="card !p-4"><p class="font-semibold">image</p><p class="mt-1 font-mono text-xs text-slate-500">avatar(), dataUri()</p></div>
-        <div class="card !p-4"><p class="font-semibold">lorem</p><p class="mt-1 font-mono text-xs text-slate-500">sentence(), markdown()</p></div>
-        <div class="card !p-4"><p class="font-semibold">color</p><p class="mt-1 font-mono text-xs text-slate-500">hex(), tailwindColor()</p></div>
-        <div class="card !p-4"><p class="font-semibold">vehicle</p><p class="mt-1 font-mono text-xs text-slate-500">manufacturer(), vin()</p></div>
-        <div class="card !p-4"><p class="font-semibold">animal</p><p class="mt-1 font-mono text-xs text-slate-500">type(), name()</p></div>
-        <div class="card !p-4"><p class="font-semibold">science</p><p class="mt-1 font-mono text-xs text-slate-500">chemicalElement()</p></div>
-        <div class="card !p-4"><p class="font-semibold">ai</p><p class="mt-1 font-mono text-xs text-slate-500">prompt(), sqlQuery()</p></div>
-        <div class="card !p-4"><p class="font-semibold">misc</p><p class="mt-1 font-mono text-xs text-slate-500">emoji(), semver()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">person</p><p class="mt-1 font-mono text-xs text-slate-500">fullName(), jobTitle()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">internet</p><p class="mt-1 font-mono text-xs text-slate-500">email(), jwt()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">company</p><p class="mt-1 font-mono text-xs text-slate-500">name(), catchPhrase()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">finance</p><p class="mt-1 font-mono text-xs text-slate-500">creditCardNumber()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">location</p><p class="mt-1 font-mono text-xs text-slate-500">city(), airport()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">commerce</p><p class="mt-1 font-mono text-xs text-slate-500">productName(), isbn()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">phone</p><p class="mt-1 font-mono text-xs text-slate-500">number(), imei()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">date</p><p class="mt-1 font-mono text-xs text-slate-500">past(), birthdate()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">image</p><p class="mt-1 font-mono text-xs text-slate-500">avatar(), dataUri()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">lorem</p><p class="mt-1 font-mono text-xs text-slate-500">sentence(), markdown()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">color</p><p class="mt-1 font-mono text-xs text-slate-500">hex(), tailwindColor()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">vehicle</p><p class="mt-1 font-mono text-xs text-slate-500">manufacturer(), vin()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">animal</p><p class="mt-1 font-mono text-xs text-slate-500">type(), name()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">science</p><p class="mt-1 font-mono text-xs text-slate-500">chemicalElement()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">ai</p><p class="mt-1 font-mono text-xs text-slate-500">prompt(), sqlQuery()</p></div>
+        <div class="card !p-4" data-reveal><p class="font-semibold">misc</p><p class="mt-1 font-mono text-xs text-slate-500">emoji(), semver()</p></div>
       </div>
       <p class="mt-8 text-center">
         <a href="./docs.html#api-reference" class="nav-link underline">See the full API reference →</a>
@@ -246,7 +278,7 @@ forge.ai.prompt();                <span class="text-slate-500">// "Explain quant
     <!-- CLI + React showcase -->
     <section class="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40">
       <div class="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2">
-        <div>
+        <div data-reveal>
           <h3 class="text-xl font-bold">From your terminal</h3>
           <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
             The <code>forgedata</code> CLI walks the real module classes — never a hand-maintained,
@@ -266,7 +298,7 @@ $ forgedata list --module color --json
 ["color.cssColorName", "color.hex", "color.hsl", ...]</pre>
           </div>
         </div>
-        <div>
+        <div data-reveal>
           <h3 class="text-xl font-bold">From your React app</h3>
           <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
             <code>@sahinur/forgedata/react</code> is a separate entry point — the main package never imports React.
@@ -290,7 +322,7 @@ $ forgedata list --module color --json
     <!-- Comparison -->
     <section class="mx-auto max-w-4xl px-6 py-20">
       <h2 class="text-center text-3xl font-bold">How it compares</h2>
-      <div class="mt-10 overflow-x-auto">
+      <div class="mt-10 overflow-x-auto" data-reveal>
         <table class="w-full border-collapse text-left text-sm">
           <thead>
             <tr class="border-b border-slate-200 dark:border-slate-800">
@@ -316,10 +348,12 @@ $ forgedata list --module color --json
 
     <!-- CTA -->
     <section class="border-t border-slate-200 py-20 text-center dark:border-slate-800">
-      <h2 class="text-3xl font-bold">Ready to forge some data?</h2>
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a href="./docs.html" class="btn-primary">Read the docs</a>
-        <a href="https://www.npmjs.com/package/@sahinur/forgedata" class="btn-secondary">View on npm</a>
+      <div data-reveal>
+        <h2 class="text-3xl font-bold">Ready to forge some data?</h2>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="./docs.html" class="btn-primary">Read the docs</a>
+          <a href="https://www.npmjs.com/package/@sahinur/forgedata" class="btn-secondary">View on npm</a>
+        </div>
       </div>
     </section>
 
@@ -348,6 +382,61 @@ $ forgedata list --module color --json
         copyBtn.textContent = "Copied!";
         setTimeout(() => (copyBtn.textContent = "Copy"), 1500);
       });
+
+      // Scroll-reveal: fade/slide elements in as they enter the viewport.
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealTargets = document.querySelectorAll("[data-reveal]");
+      if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        revealTargets.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+        );
+        revealTargets.forEach((el) => revealObserver.observe(el));
+      }
+
+      // Animated stat counters, once the stats row scrolls into view.
+      const statEls = document.querySelectorAll("[data-count-to]");
+      function animateCount(el) {
+        const target = Number(el.dataset.countTo);
+        if (prefersReducedMotion) {
+          el.textContent = String(target);
+          return;
+        }
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = String(Math.round(target * eased));
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      if (statEls.length > 0 && "IntersectionObserver" in window) {
+        const statsObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                statEls.forEach(animateCount);
+                statsObserver.disconnect();
+              }
+            }
+          },
+          { threshold: 0.5 },
+        );
+        statsObserver.observe(document.getElementById("stats"));
+      } else {
+        statEls.forEach((el) => (el.textContent = el.dataset.countTo));
+      }
     </script>
 
     <script type="module">
@@ -413,6 +502,36 @@ $ forgedata list --module color --json
 
       status.textContent = `${generators.length} generators loaded from the live package.`;
       generate();
+
+      // Hero ticker: cycles through real output from a handful of generators,
+      // independent of the playground's forge instance/seed above.
+      const ticker = document.getElementById("hero-ticker");
+      if (ticker) {
+        const tickerForge = new ForgeData();
+        const tickerLines = [
+          () => `forge.person.fullName() -> "${tickerForge.person.fullName()}"`,
+          () => `forge.internet.email() -> "${tickerForge.internet.email()}"`,
+          () => `forge.finance.creditCardNumber() -> "${tickerForge.finance.creditCardNumber()}"`,
+          () => `forge.location.city() -> "${tickerForge.location.city()}"`,
+          () => `forge.ai.prompt() -> "${tickerForge.ai.prompt()}"`,
+          () => `forge.company.name() -> "${tickerForge.company.name()}"`,
+        ];
+        let tickerIndex = 0;
+        const prefersReducedMotionTicker = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function showNextTickerLine() {
+          ticker.style.transition = prefersReducedMotionTicker ? "none" : "opacity 300ms ease";
+          ticker.style.opacity = "0";
+          setTimeout(() => {
+            ticker.textContent = tickerLines[tickerIndex]();
+            tickerIndex = (tickerIndex + 1) % tickerLines.length;
+            ticker.style.opacity = "1";
+          }, prefersReducedMotionTicker ? 0 : 300);
+        }
+
+        showNextTickerLine();
+        if (!prefersReducedMotionTicker) setInterval(showNextTickerLine, 2800);
+      }
     </script>
   </body>
 </html>
