@@ -18,7 +18,7 @@ module.exports = {
     browser: true,
     es2020: true,
   },
-  ignorePatterns: ["dist", "node_modules", "coverage", "site"],
+  ignorePatterns: ["dist", "node_modules", "coverage", "docs"],
   rules: {
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-explicit-any": "off",

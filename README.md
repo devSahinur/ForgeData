@@ -259,20 +259,20 @@ npm run bench            # micro-benchmark, compares against faker if installed
 npm run cli -- list      # run the CLI from source during development
 ```
 
-See the [documentation site](https://devsahinur.github.io/ForgeData/docs.html) (built from `site/docs.html`) for the getting-started guide, full API reference, React guide, CLI reference, migration guide from Faker.js, and contributing guide. See [examples/](./examples) for runnable Node, browser, React, and CLI samples.
+See the [documentation site](https://devsahinur.github.io/ForgeData/docs.html) (built from `docs/docs.html`) for the getting-started guide, full API reference, React guide, CLI reference, migration guide from Faker.js, and contributing guide. See [examples/](./examples) for runnable Node, browser, React, and CLI samples.
 
 ## Website
 
-`site/` is a plain HTML + Tailwind CSS landing page and single-page documentation site (no framework, no build step beyond compiling CSS):
+`docs/` is a plain HTML + Tailwind CSS landing page and single-page documentation site (no framework, no server-side build):
 
 ```bash
-cd site
+cd docs
 npm install
-npm run build   # compiles src/input.css -> dist/output.css
-npm run serve   # or just open index.html directly once dist/output.css exists
+npm run build   # compiles src/input.css -> dist/output.css (commit the result)
+npm run serve   # or just open index.html directly
 ```
 
-`.github/workflows/pages.yml` builds and deploys `site/` to GitHub Pages on every push to `main` that touches it — enable it once via **Settings → Pages → Source → GitHub Actions**.
+Deployed straight from the repo — no CI needed: **Settings → Pages → Source → Deploy from a branch → `main` / `docs`**. Because there's no build step in that flow, `docs/dist/output.css` is committed rather than gitignored; run `npm run build` in `docs/` and commit the output whenever you touch `docs/src/input.css` or add new Tailwind classes to the HTML.
 
 ## Publishing
 
