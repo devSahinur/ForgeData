@@ -175,7 +175,7 @@ npx --package=@sahinur/forgedata forgedata generate internet.email --count 5 --s
 npx --package=@sahinur/forgedata forgedata generate location.country --locale ja --json
 ```
 
-Install it globally (`npm install -g @sahinur/forgedata`) to just run `forgedata ...` directly; see [docs/cli.md](./docs/cli.md) for the full flag reference.
+Install it globally (`npm install -g @sahinur/forgedata`) to just run `forgedata ...` directly; see the [docs site](https://devsahinur.github.io/ForgeData/docs.html#cli) for the full flag reference.
 
 ## Modules
 
@@ -220,7 +220,7 @@ npm run bench            # micro-benchmark, compares against faker if installed
 npm run cli -- list      # run the CLI from source during development
 ```
 
-See [docs/](./docs) for the getting-started guide, full API reference, React guide, CLI reference, migration guide from Faker.js, and contributing guide. See [examples/](./examples) for runnable Node, browser, React, and CLI samples.
+See the [documentation site](https://devsahinur.github.io/ForgeData/docs.html) (built from `site/docs.html`) for the getting-started guide, full API reference, React guide, CLI reference, migration guide from Faker.js, and contributing guide. See [examples/](./examples) for runnable Node, browser, React, and CLI samples.
 
 ## Website
 
@@ -247,7 +247,7 @@ npm publish --access public
 
 `scripts/publish.sh` wraps that sequence with a confirmation prompt, and `RELEASE_NOTES.md` has a ready-to-paste description for the GitHub Release / npm announcement.
 
-For every release after the first, `.github/workflows/release.yml` runs [semantic-release](https://semantic-release.gitbook.io/) on pushes to `main` — it derives the next version from [Conventional Commits](https://www.conventionalcommits.org/), updates `CHANGELOG.md`, tags, and publishes, but only once you add an `NPM_TOKEN` repository secret. Until then it's a no-op (see `docs/contributing.md#releasing`); it never requires a token to just sit there ready.
+For every release after the first, `.github/workflows/release.yml` runs [semantic-release](https://semantic-release.gitbook.io/) on pushes to `main` — it derives the next version from [Conventional Commits](https://www.conventionalcommits.org/), updates `CHANGELOG.md`, tags, and publishes, but only once you add an `NPM_TOKEN` repository secret. Until then it's a no-op (see the docs site's [Contributing](https://devsahinur.github.io/ForgeData/docs.html#contributing) section); it never requires a token to just sit there ready.
 
 ## License
 

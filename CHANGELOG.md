@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 From this point forward, entries in this file are generated automatically by
 [semantic-release](https://semantic-release.gitbook.io/) from
 [Conventional Commits](https://www.conventionalcommits.org/) on `main` — see
-`.releaserc.json` and `docs/contributing.md`. New entries are prepended above
-this line by CI; do not hand-edit past releases.
+`.releaserc.json` and the docs site's [Contributing](https://devsahinur.github.io/ForgeData/docs.html#contributing)
+section. New entries are prepended above this line by CI; do not hand-edit past releases.
 
 ## [0.1.0] - Unreleased
 

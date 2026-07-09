@@ -6,7 +6,7 @@ name: Release
 # last release, AND the NPM_TOKEN secret below is configured. Until you add
 # that secret, this workflow safely fails at the publish step and nothing is
 # published — publishing manually via `npm login && npm publish --access
-# public` (see RELEASE_NOTES.md / docs/contributing.md) is unaffected either way.
+# public` (see RELEASE_NOTES.md) is unaffected either way.
 on:
   push:
     branches: [main]

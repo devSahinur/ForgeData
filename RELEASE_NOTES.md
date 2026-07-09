@@ -53,11 +53,11 @@ forge.person.fullName();
 forge.internet.email();
 ```
 
-See [README.md](./README.md) and [docs/](./docs) for the full guide, API
-reference, React guide, CLI reference, and migration notes from Faker.js.
+See [README.md](./README.md) and the [documentation site](https://devsahinur.github.io/ForgeData/docs.html)
+for the full guide, API reference, React guide, CLI reference, and migration notes from Faker.js.
 
 ## Links
 
 - npm: https://www.npmjs.com/package/@sahinur/forgedata
-- Docs: [docs/getting-started.md](./docs/getting-started.md)
+- Docs: https://devsahinur.github.io/ForgeData/docs.html
 - Changelog: [CHANGELOG.md](./CHANGELOG.md)

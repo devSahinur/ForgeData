@@ -173,7 +173,7 @@ forge.invoke("person", "fullName"); // dynamic dispatch</code></pre>
             <tr><td><code>misc</code></td><td>emoji, hashtag, programmingLanguage, githubUsername, gitCommitHash, semver, dockerImageName, npmPackageName, otp, licenseKey, qrData, movie, book, music, food, holiday, university</td></tr>
           </tbody>
         </table>
-        <p>Full method signatures live next to each implementation in <code>src/&lt;module&gt;/index.ts</code> with JSDoc, and in the repo's <a href="https://github.com/devSahinur/ForgeData/blob/main/docs/api-reference.md">docs/api-reference.md</a>.</p>
+        <p>Full method signatures live next to each implementation in <a href="https://github.com/devSahinur/ForgeData/tree/main/src"><code>src/&lt;module&gt;/index.ts</code></a> with JSDoc.</p>
 
         <h2 id="react">React Integration</h2>
         <pre><code>npm install @sahinur/forgedata react</code></pre>
@@ -248,7 +248,7 @@ forgedata generate location.country --locale ja --json</code></pre>
             <tr><td><code>faker.setLocale("de")</code></td><td><code>forge.locale("de")</code></td></tr>
           </tbody>
         </table>
-        <p>Key differences: ForgeData is instance-based (no required global singleton), ships a built-in React integration and CLI that Faker.js doesn't have, and covers 9 locales rather than 100+ — extend with <code>forge.defineLocale()</code> for anything domain-specific. Full guide in <a href="https://github.com/devSahinur/ForgeData/blob/main/docs/migration-guide.md">docs/migration-guide.md</a>.</p>
+        <p>Key differences: ForgeData is instance-based (no required global singleton), ships a built-in React integration and CLI that Faker.js doesn't have, and covers 9 locales rather than 100+ — extend with <code>forge.defineLocale()</code> for anything domain-specific.</p>
 
         <h2 id="contributing">Contributing</h2>
         <pre><code>git clone https://github.com/devSahinur/ForgeData.git
@@ -258,8 +258,7 @@ npm run preflight   # lint + typecheck + 100%-coverage tests + build</code></pre
         <p>
           CI enforces 100% statement/branch/function/line coverage. Commit messages follow
           <a href="https://www.conventionalcommits.org/">Conventional Commits</a> — semantic-release
-          derives the next version and changelog entry from them. Full guide in
-          <a href="https://github.com/devSahinur/ForgeData/blob/main/docs/contributing.md">docs/contributing.md</a>.
+          derives the next version and changelog entry from them.
         </p>
       </main>
     </div>
