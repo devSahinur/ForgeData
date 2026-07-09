@@ -1,8 +1,28 @@
-# ForgeData
+<div align="center">
 
-A modern, modular, tree-shakable, zero-runtime-dependency fake data generator for TypeScript and JavaScript. A production-ready alternative to Faker.js — with React integration and a CLI built in.
+# ⚒️ ForgeData
 
-**[Website & Docs](https://devsahinur.github.io/ForgeData/)** · **[npm](https://www.npmjs.com/package/@sahinur/forgedata)** · **[GitHub](https://github.com/devSahinur/ForgeData)**
+**A modern, modular, tree-shakable, zero-runtime-dependency fake data generator for TypeScript and JavaScript.**
+
+A production-ready alternative to Faker.js — with React integration and a CLI built in.
+
+[![npm version](https://img.shields.io/npm/v/%40sahinur%2Fforgedata.svg?color=6366f1)](https://www.npmjs.com/package/@sahinur/forgedata)
+[![npm downloads](https://img.shields.io/npm/dm/%40sahinur%2Fforgedata.svg?color=6366f1)](https://www.npmjs.com/package/@sahinur/forgedata)
+[![CI](https://img.shields.io/github/actions/workflow/status/devSahinur/ForgeData/ci.yml?branch=main&label=CI)](https://github.com/devSahinur/ForgeData/actions/workflows/ci.yml)
+[![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](./vitest.config.ts)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/%40sahinur%2Fforgedata.svg)](https://bundlephobia.com/package/@sahinur/forgedata)
+[![types](https://img.shields.io/badge/types-included-3178c6?logo=typescript&logoColor=white)](./src/index.ts)
+[![license](https://img.shields.io/npm/l/%40sahinur%2Fforgedata.svg?color=6366f1)](./LICENSE)
+
+[**Website**](https://devsahinur.github.io/ForgeData/) &nbsp;·&nbsp;
+[**Try it live**](https://devsahinur.github.io/ForgeData/#playground) &nbsp;·&nbsp;
+[**Docs**](https://devsahinur.github.io/ForgeData/docs.html) &nbsp;·&nbsp;
+[**npm**](https://www.npmjs.com/package/@sahinur/forgedata) &nbsp;·&nbsp;
+[**GitHub**](https://github.com/devSahinur/ForgeData)
+
+</div>
+
+---
 
 - **100+ generators** across 16 modules (`forge.listGenerators()` to see every one)
 - **Zero runtime dependencies**
@@ -16,6 +36,25 @@ A modern, modular, tree-shakable, zero-runtime-dependency fake data generator fo
 - **React integration** (`@sahinur/forgedata/react`): a provider + two hooks
 - **CLI** (`forgedata`): generate fake data from your terminal or scripts
 - **100% test coverage** (statements/branches/functions/lines)
+
+## Table of contents
+
+- [Install](#install)
+- [Quick start](#quick-start)
+- [Deterministic output (seeding)](#deterministic-output-seeding)
+- [Locales](#locales)
+- [Custom generators](#custom-generators)
+- [Unique values](#unique-values)
+- [Helpers & randomness utilities](#helpers--randomness-utilities)
+- [Generator introspection](#generator-introspection)
+- [React integration](#react-integration)
+- [CLI](#cli)
+- [Modules](#modules)
+- [Runtime support](#runtime-support)
+- [Development](#development)
+- [Website](#website)
+- [Publishing](#publishing)
+- [License](#license)
 
 ## Install
 
@@ -127,7 +166,7 @@ forge.weighted([
 forge.randomArray(() => forge.person.fullName(), 5);
 ```
 
-## Introspection: `listGenerators()` / `invoke()`
+## Generator introspection
 
 Every module is walked via prototype introspection rather than a hand-maintained registry, so this never drifts from the real API:
 
